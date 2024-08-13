@@ -1,8 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Messages</ion-title>
+    <ion-title><ion-icon name="chevron-back" (click)="goBack()"></ion-icon></ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="openUserList()">Nouvelle discussion</ion-button>
+      <ion-button (click)="openUserList()"><ion-icon name="call"></ion-icon><p class="plus">+</p> </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

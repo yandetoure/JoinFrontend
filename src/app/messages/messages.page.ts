@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MessagesService } from '../services/messages.service';
 import { ToastController, ModalController } from '@ionic/angular';
 import { ListUserPage } from '../list-user/list-user.page';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-messages',
@@ -19,7 +20,8 @@ export class MessagesPage implements OnInit {
     private route: ActivatedRoute,
     private messagesService: MessagesService,
     private toastController: ToastController,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private navCtrl: NavController
   ) {}
 
   ngOnInit() {
@@ -82,5 +84,9 @@ export class MessagesPage implements OnInit {
     }, error => {
       console.error('Error marking message as read:', error);
     });
+  }
+
+  goBack() {
+    this.navCtrl.back();
   }
 }

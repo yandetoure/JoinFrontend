@@ -65,7 +65,30 @@
 }
 
 .button {
-    background-color: #14947f; // Couleur du bouton d'envoi
+
     border-color: #109ba0;
     color: #ffffff; // Couleur du texte du bouton
+}
+.add{
+    background-color: #109ba0; // Couleur de fond du bouton ajouter
+    color: #000000; // Couleur du texte du bouton ajouter
+    font-size: 18px;
+    font-weight: 900;
+    border-radius:50%;
+    padding: 3px;
+}
+
+.container{
+    margin-top: 10px;
+}
+
+.title{
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: -12px;
+    margin-bottom: 10px;
+}
+.plus{
+margin-left: -5px;
+margin-right: 10px;
 }

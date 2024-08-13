@@ -2,12 +2,12 @@
   <ion-toolbar>
     <ion-title>Discussions</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="startNewDiscussion()">Nouvelle Discussion</ion-button>
+      <ion-button (click)="startNewDiscussion()"><ion-icon name="add-outline" class="add"></ion-icon></ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="container">
   <ion-list>
     <ng-container *ngIf="discussions.length > 0">
       <ion-item *ngFor="let discussion of discussions" (click)="openMessages(discussion.user_id)">
