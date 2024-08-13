@@ -1,94 +1,127 @@
-// Styles personnalisés pour les messages
 .auth-message {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 10px;
+    background-color: #086d95; /* Light cyan background for messages from authUser */
+    border: 1px solid #07675b; /* Accent border color */
+    height: auto;
+  }
+  
+  .user-message {
+    background-color: #07675b; /* Light orange background for messages from others */
+    border: 1px solid #086d95; /* Accent border color */
 
-    .p-2 {
-        background-color: rgb(6 87 112) !important; // Couleur de fond pour le message de l'utilisateur authentifié
-        color: #ffffff; // Couleur du texte
-        border-radius: 15px; // Bordure arrondie
-        border: 1px solid transparent; // Bordure transparente pour que la taille soit correcte
-    }
+  }
+  
+  .icon {
+    text-align: right;
+  }
+  
+
+/* Triangle pour l'utilisateur authentifié */
+.auth-message::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: -10px; /* Positionne le triangle à droite */
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent rgb(241, 241, 241) transparent transparent;
+    border-radius:30px;
 }
 
-.user-message {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 10px;
+/* Triangle pour l'autre utilisateur */
+.user-message::after {
 
-    .p-2 {
-        background-color: #f1f1f1; // Couleur de fond pour le message de l'autre utilisateur
-        color: #000000; // Couleur du texte
-        border-radius: 15px; // Bordure arrondie
-        border: 1px solid transparent; // Bordure transparente pour que la taille soit correcte
-    }
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -10px; /* Positionne le triangle à gauche */
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent transparent rgb(6 87 112);
+    border-radius: 30px;
 }
 
-.bg-primary {
-    background-color: rgb(6 87 112) !important;
-}
-
-.bg {
-    background-color: rgb(105, 156, 172) !important;
-}
-
-// Style pour l'icône de message
+/* Style pour l'icône */
 .icon {
-    font-size: 1.5em; // Ajuste la taille de l'icône
+    font-size: 1.1em;
+    text-align: end;
 }
 
-// Icône des messages non lus
+/* Icône des messages non lus */
 .message-unread .icon {
-    color: #ffffff9d; // Couleur blanche pour les messages non lus
+    color: #ffffff9f;
 }
 
-// Icône des messages lus
+/* Icône des messages lus */
 .message-read .icon {
-    color: #cfdbd7ea; // Couleur bleue pour les messages lus
+    color: #ffffff;
 }
 
-// Style pour la zone de saisie de message
+/* Style pour la zone de saisie de message */
 .fixed-bottom {
     bottom: 0;
     width: 100%;
 }
 
-.input-group {
+.container-form {
     display: flex;
     align-items: center;
+    height: 50px;
+    ion-textarea{
+        height: 10px;
+        border-radius:20px;
+        border: 1px solid #07675b; /* Accent border color */
+        margin: 10px;
+    }
 }
 
 .form-control {
     flex: 1;
     margin-right: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .button {
-
     border-color: #109ba0;
-    color: #ffffff; // Couleur du texte du bouton
+    color: #ffffff;
 }
-.add{
-    background-color: #109ba0; // Couleur de fond du bouton ajouter
-    color: #000000; // Couleur du texte du bouton ajouter
+
+.add {
+    background-color: #109ba0;
+    color: #000000;
     font-size: 18px;
     font-weight: 900;
-    border-radius:50%;
+    border-radius: 50%;
     padding: 3px;
 }
 
-.container{
+.container {
     margin-top: 10px;
+    margin-bottom: 100px;
 }
 
-.title{
+.title {
     font-size: 22px;
     font-weight: bold;
     margin-left: -12px;
     margin-bottom: 10px;
 }
-.plus{
-margin-left: -5px;
-margin-right: 10px;
+
+.plus {
+    margin-left: -5px;
+    margin-right: 10px;
+}
+
+.btn{
+color:#0b7258;
+font-size: 18px;
+}
+.more {
+
+    color: #000000;
+    font-size: 28px;
+    font-weight: 900;
+    border-radius: 50%;
+    padding: 3px;
+    margin-left: 10px;
 }

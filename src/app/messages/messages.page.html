@@ -1,53 +1,65 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title><ion-icon name="chevron-back" (click)="goBack()"></ion-icon></ion-title>
+    <ion-title>
+      <ion-icon name="chevron-back" (click)="goBack()"></ion-icon>
+      Discussions
+    </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="openUserList()"><ion-icon name="call"></ion-icon><p class="plus">+</p> </ion-button>
+      <ion-button (click)="openUserList()">
+        <ion-icon name="call"></ion-icon><p class="plus">+</p>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="container">
+  <div class="container mt-3">
     <div class="row">
       <!-- Affichage des messages -->
       <div *ngFor="let message of messages" class="col-12 mb-2">
-        <!-- <ion-label>{{ message.user.pseudo }}</ion-label> -->
-        <div [ngClass]="{
-          'text-end': message.sender_id === authUserId,
-          'text-start': message.sender_id !== authUserId,
-          'bg-primary': message.sender_id === authUserId,
-          'bg': message.sender_id !== authUserId,
-          'message-read': message.is_read,
-          'message-unread': !message.is_read
-        }" class="p-2 rounded">
-          <p>{{ message.message }}</p>
-          <p *ngIf="!message.is_read" class="icon"><ion-icon name="checkmark-done-outline"></ion-icon></p>
+        <div 
+          [ngClass]="{
+            'text-end auth-message': message.sender_id === authUserId,
+            'text-start user-message': message.sender_id !== authUserId,
+            'message-read': message.is_read,
+            'message-unread': !message.is_read
+          }" 
+          class="p-2 rounded position-relative"
+        >
+          <p class="m-0">{{ message.message }}</p>
+          <p *ngIf="!message.is_read" class="icon bottom-0 me-2">
+            <ion-icon name="checkmark-done-outline"></ion-icon>
+          </p>
+          <!-- Triangle pointer -->
+          <div class="triangle" [ngClass]="{
+            'triangle-left': message.sender_id === authUserId, 
+            'triangle-right': message.receiver_id !== authUserId
+          }"></div>
         </div>
       </div>
     </div>
 
     <!-- Aucun message disponible -->
     <ng-template #noMessages>
-      <ion-item>
-        <ion-label>Aucun message disponible. Commencez une nouvelle discussion !</ion-label>
-      </ion-item>
+      <div class="alert alert-info text-center">
+        Aucun message disponible. Commencez une nouvelle discussion !
+      </div>
     </ng-template>
   </div>
 
   <!-- Zone de saisie de message -->
   <div class="fixed-bottom bg-light p-2">
-    <div class="container">
-      <div class="input-group">
-        <ion-input
-          [(ngModel)]="newMessage"
-          placeholder="Tapez votre message ici..."
-          class="form-control"
-        ></ion-input>
-        <ion-button expand="none" (click)="sendMessage()" class="button">
-          Envoyer
-        </ion-button>
-      </div>
+    <div class="container-form">
+      <ion-icon name="add-circle-outline" class="more"></ion-icon>
+      <ion-textarea
+        [(ngModel)]="newMessage"
+        placeholder="Écrivez un message..."
+        auto-grow="true"
+        class="form-control"
+      ></ion-textarea>
+      <button (click)="sendMessage()" class="btn">
+        <ion-icon name="send"></ion-icon>
+      </button>
     </div>
   </div>
 </ion-content>

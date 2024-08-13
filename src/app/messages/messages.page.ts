@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessagesService } from '../services/messages.service';
-import { ToastController, ModalController } from '@ionic/angular';
+import { ToastController, ModalController, NavController } from '@ionic/angular';
 import { ListUserPage } from '../list-user/list-user.page';
-import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-messages',
@@ -31,6 +30,11 @@ export class MessagesPage implements OnInit {
       this.messagesService.getMessages(this.userId).subscribe(
         response => {
           this.messages = response.data;
+          this.messages.forEach(message => {
+            if (!message.is_read && message.receiver_id === this.authUserId) {
+              this.onMessageViewed(message.id);
+            }
+          });
         },
         async error => {
           const toast = await this.toastController.create({

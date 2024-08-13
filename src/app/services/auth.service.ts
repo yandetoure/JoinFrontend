@@ -22,18 +22,9 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, { email, password });
   }
 
-  logout(): void {
-    this.http.get<any>(`${this.apiUrl}/logout`, { headers: this.getAuthHeaders() })
-      .subscribe({
-        next: () => {
-          this.clearToken();  // Supprime le token et redirige vers la page de login
-        },
-        error: (error) => {
-          console.error('Erreur lors de la déconnexion', error);
-          // Gérer les erreurs ici si nécessaire
-          this.clearToken();  // Supprime quand même le token et redirige en cas d'erreur
-        }
-      });
+  logout(): Observable<void> {
+    // Assurez-vous que votre API renvoie un Observable pour la déconnexion
+    return this.http.post<void>(`${this.apiUrl}/logout`, {});
   }
   
 
