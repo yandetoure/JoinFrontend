@@ -12,6 +12,7 @@
     <div class="row">
       <!-- Affichage des messages -->
       <div *ngFor="let message of messages" class="col-12 mb-2">
+        <!-- <ion-label>{{ message.user.pseudo }}</ion-label> -->
         <div [ngClass]="{
           'text-end': message.sender_id === authUserId,
           'text-start': message.sender_id !== authUserId,
