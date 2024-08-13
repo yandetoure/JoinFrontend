@@ -26,10 +26,26 @@
           }" 
           class="p-2 rounded position-relative"
         >
+          <!-- Contenu du message -->
           <p class="m-0">{{ message.message }}</p>
+
+          <!-- Icône de lecture si le message n'est pas lu -->
           <p *ngIf="!message.is_read" class="icon bottom-0 me-2">
             <ion-icon name="checkmark-done-outline"></ion-icon>
           </p>
+
+          <!-- Affichage de l'heure -->
+          <p class="text-muted small mt-1">
+            <!-- Pour le récepteur, afficher l'heure de l'envoi -->
+            <span *ngIf="message.receiver_id === authUserId">
+              {{ message.created_at | date: 'shortTime' }}
+            </span>
+            <!-- Pour l'expéditeur, afficher l'heure de lecture -->
+            <span *ngIf="message.sender_id === authUserId && message.is_read">
+              Lu à {{ message.read_at | date: 'shortTime' }}
+            </span>
+          </p>
+
           <!-- Triangle pointer -->
           <div class="triangle" [ngClass]="{
             'triangle-left': message.sender_id === authUserId, 

@@ -31,10 +31,17 @@ export class MessagesPage implements OnInit {
         response => {
           this.messages = response.data;
           this.messages.forEach(message => {
-            if (!message.is_read && message.receiver_id === this.authUserId) {
-              this.onMessageViewed(message.id);
+            if (!message.is_read) {
+              this.messagesService.markMessagesAsRead(message.id).subscribe(
+                () => {
+                  message.is_read = true; // Mettez à jour l'état localement aussi
+                },
+                error => {
+                  console.error('Erreur lors de la mise à jour du statut du message', error);
+                }
+              );
             }
-          });
+          }); // <-- Ajout de la fermeture ici
         },
         async error => {
           const toast = await this.toastController.create({
@@ -47,6 +54,7 @@ export class MessagesPage implements OnInit {
       );
     }
   }
+  
 
   sendMessage() {
     if (this.newMessage.trim()) {

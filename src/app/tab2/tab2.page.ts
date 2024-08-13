@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class Tab2Page implements OnInit {
   discussions: any[] = [];
+  totalUnreadCount: number = 0;
 
   constructor(
     private messagesService: MessagesService,
@@ -26,16 +27,17 @@ export class Tab2Page implements OnInit {
   loadDiscussions() {
     this.messagesService.getDiscussions().subscribe(
       response => {
-        if (response.data && typeof response.data === 'object') {
-          this.discussions = response.data;
-        } else {
-          console.error('Les données des discussions ne sont pas dans le format attendu');
-        }
+        this.discussions = response.data;
+        this.calculateUnreadMessages();
       },
       error => {
-        console.error('Erreur lors de la récupération des discussions', error);
+        console.error('Erreur lors du chargement des discussions', error);
       }
     );
+  }
+
+  calculateUnreadMessages() {
+    this.totalUnreadCount = this.discussions.reduce((acc, discussion) => acc + discussion.unread_count, 0);
   }
 
     getUserIds(discussions: { [key: number]: any[] }): number[] {

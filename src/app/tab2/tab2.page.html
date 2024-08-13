@@ -2,10 +2,17 @@
   <ion-toolbar>
     <ion-title>Discussions</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="startNewDiscussion()"><ion-icon name="add-outline" class="add"></ion-icon></ion-button>
+      <ion-button *ngIf="totalUnreadCount > 0">
+        <ion-icon name="mail-unread-outline" class="unread-icon"></ion-icon>
+        <span>{{ totalUnreadCount }} non lus</span>
+      </ion-button>
+      <ion-button (click)="startNewDiscussion()">
+        <ion-icon name="add-outline" class="add"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content class="container">
   <ion-list>
@@ -14,7 +21,8 @@
         <ion-label>
           <h2>{{ discussion.user_pseudo }}</h2>
           <p>{{ discussion.last_message | slice:0:30 }}...</p>
-          <p>{{ discussion.last_message_time }} - {{ discussion.unread_count }} non lus</p>
+          <p>{{ discussion.last_message_time }}</p>
+          <p *ngIf="discussion.unread_count > 0">{{ discussion.unread_count }} non lus</p>
         </ion-label>
       </ion-item>
     </ng-container>
@@ -25,3 +33,4 @@
     <ion-button (click)="startNewDiscussion()">Commencer une discussion</ion-button>
   </div>
 </ion-content>
+
