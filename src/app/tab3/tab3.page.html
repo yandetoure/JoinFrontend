@@ -1,22 +1,16 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Profil</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-card *ngIf="userInfo">
-    <ion-card-header>
-      <ion-card-title>{{ userInfo.pseudo }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
+<div class="container mt-5">
+  <div class="card" *ngIf="userInfo">
+    <div class="card-header">
+      <h5 class="card-title">{{ userInfo.pseudo }}</h5>
+    </div>
+    <div class="card-body">
       <p><strong>Prénom :</strong> {{ userInfo.first_name }}</p>
       <p><strong>Nom :</strong> {{ userInfo.last_name }}</p>
       <p><strong>Email :</strong> {{ userInfo.email }}</p>
-    </ion-card-content>
-  </ion-card>
+    </div>
+  </div>
 
   <ion-button expand="full" color="danger" (click)="logout()">
     Déconnexion
   </ion-button>
-</ion-content>
+</div>
