@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Messages</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openUserList()">Nouvelle discussion</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <div class="row">
+      <!-- Affichage des messages -->
+      <div *ngFor="let message of messages" class="col-12 mb-2">
+        <div [ngClass]="{
+          'text-end': message.sender_id === authUserId,
+          'text-start': message.sender_id !== authUserId,
+          'bg-primary': message.sender_id === authUserId,
+          'bg': message.sender_id !== authUserId,
+          'message-read': message.is_read,
+          'message-unread': !message.is_read
+        }" class="p-2 rounded">
+          <p>{{ message.message }}</p>
+          <p *ngIf="!message.is_read" class="icon"><ion-icon name="checkmark-done-outline"></ion-icon></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aucun message disponible -->
+    <ng-template #noMessages>
+      <ion-item>
+        <ion-label>Aucun message disponible. Commencez une nouvelle discussion !</ion-label>
+      </ion-item>
+    </ng-template>
+  </div>
+
+  <!-- Zone de saisie de message -->
+  <div class="fixed-bottom bg-light p-2">
+    <div class="container">
+      <div class="input-group">
+        <ion-input
+          [(ngModel)]="newMessage"
+          placeholder="Tapez votre message ici..."
+          class="form-control"
+        ></ion-input>
+        <ion-button expand="none" (click)="sendMessage()" class="button">
+          Envoyer
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

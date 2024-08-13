@@ -1,17 +1,27 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title>Discussions</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="startNewDiscussion()">Nouvelle Discussion</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <ion-list>
+    <ng-container *ngIf="discussions.length > 0">
+      <ion-item *ngFor="let discussion of discussions" (click)="openMessages(discussion.user_id)">
+        <ion-label>
+          <h2>{{ discussion.user_pseudo }}</h2>
+          <p>{{ discussion.last_message | slice:0:30 }}...</p>
+          <p>{{ discussion.last_message_time }} - {{ discussion.unread_count }} non lus</p>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <div *ngIf="discussions.length === 0" class="no-discussions">
+    <p>Aucune discussion n'est disponible.</p>
+    <ion-button (click)="startNewDiscussion()">Commencer une discussion</ion-button>
+  </div>
 </ion-content>

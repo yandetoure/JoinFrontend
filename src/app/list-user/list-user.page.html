@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Liste des utilisateurs</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Fermer</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor="let user of users" (click)="selectUser(user)">
+      <ion-label>{{ user.pseudo }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,43 @@
+<!-- src/app/pages/register/register.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Inscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+    <ion-item>
+      <ion-label position="floating">Prénom</ion-label>
+      <ion-input formControlName="firstName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nom</ion-label>
+      <ion-input formControlName="lastName"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Pseudo</ion-label>
+      <ion-input formControlName="pseudo"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Mot de passe</ion-label>
+      <ion-input formControlName="password" type="password"></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="registerForm.invalid">S'inscrire</ion-button>
+
+    <ion-item>
+      <ion-label>
+        Déjà inscrit ? <a routerLink="/login">Se connecter</a>
+      </ion-label>
+    </ion-item>
+  </form>
+</ion-content>

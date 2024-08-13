@@ -1,4 +1,4 @@
-/* src/app/pages/tab2/tab2.page.scss */
+/* src/app/pages/login/login.page.scss */
 ion-header {
     --background: #3880ff;
   }
@@ -8,12 +8,12 @@ ion-header {
   }
   
   ion-content {
-    ion-list {
-      margin-top: 10px;
-    }
-  
     ion-item {
-      cursor: pointer;
+      margin-bottom: 20px;
     }
+  }
+  
+  ion-button {
+    margin-top: 20px;
   }
   

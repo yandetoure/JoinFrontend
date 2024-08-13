@@ -1,0 +1,71 @@
+// Styles personnalisés pour les messages
+.auth-message {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+
+    .p-2 {
+        background-color: rgb(6 87 112) !important; // Couleur de fond pour le message de l'utilisateur authentifié
+        color: #ffffff; // Couleur du texte
+        border-radius: 15px; // Bordure arrondie
+        border: 1px solid transparent; // Bordure transparente pour que la taille soit correcte
+    }
+}
+
+.user-message {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+
+    .p-2 {
+        background-color: #f1f1f1; // Couleur de fond pour le message de l'autre utilisateur
+        color: #000000; // Couleur du texte
+        border-radius: 15px; // Bordure arrondie
+        border: 1px solid transparent; // Bordure transparente pour que la taille soit correcte
+    }
+}
+
+.bg-primary {
+    background-color: rgb(6 87 112) !important;
+}
+
+.bg {
+    background-color: rgb(105, 156, 172) !important;
+}
+
+// Style pour l'icône de message
+.icon {
+    font-size: 1.5em; // Ajuste la taille de l'icône
+}
+
+// Icône des messages non lus
+.message-unread .icon {
+    color: #ffffff9d; // Couleur blanche pour les messages non lus
+}
+
+// Icône des messages lus
+.message-read .icon {
+    color: #cfdbd7ea; // Couleur bleue pour les messages lus
+}
+
+// Style pour la zone de saisie de message
+.fixed-bottom {
+    bottom: 0;
+    width: 100%;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.button {
+    background-color: #14947f; // Couleur du bouton d'envoi
+    border-color: #109ba0;
+    color: #ffffff; // Couleur du texte du bouton
+}
