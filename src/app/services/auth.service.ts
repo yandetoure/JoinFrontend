@@ -22,9 +22,20 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, { email, password });
   }
 
-  logout(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/logout`);
+  logout(): void {
+    this.http.get<any>(`${this.apiUrl}/logout`, { headers: this.getAuthHeaders() })
+      .subscribe({
+        next: () => {
+          this.clearToken();  // Supprime le token et redirige vers la page de login
+        },
+        error: (error) => {
+          console.error('Erreur lors de la déconnexion', error);
+          // Gérer les erreurs ici si nécessaire
+          this.clearToken();  // Supprime quand même le token et redirige en cas d'erreur
+        }
+      });
   }
+  
 
   setToken(token: string) {
     localStorage.setItem('token', token);
@@ -45,8 +56,18 @@ export class AuthService {
     return this.http.get<any>(`${this.apiUrl}/users`, { headers: this.getAuthHeaders() });
   }
 
-  private getAuthHeaders() {
+  private getAuthHeaders(): HttpHeaders {
     const token = this.getToken();
-    return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
   }
+  
+
+  // Méthode pour obtenir les informations utilisateur
+  getUserInfo(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/profile`, { headers: this.getAuthHeaders() });
+  }
+
 }

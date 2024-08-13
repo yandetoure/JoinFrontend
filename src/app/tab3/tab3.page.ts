@@ -1,12 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  templateUrl: './tab3.page.html',
+  styleUrls: ['./tab3.page.scss'],
 })
-export class Tab3Page {
+export class Tab3Page implements OnInit {
+  userInfo: any = {};
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
+  ngOnInit() {
+    this.loadUserInfo();
+  }
+
+  loadUserInfo() {
+    this.authService.getUserInfo().subscribe(
+      data => {
+        console.log('User Info:', data); // Ajoutez ce log pour vérifier les données reçues
+        this.userInfo = data.data; // Assurez-vous que `data.data` contient les informations utilisateur
+      },
+      error => {
+        console.error('Erreur lors de la récupération des informations utilisateur', error);
+      }
+    );
+  }
+  
+
+  logout() {
+    this.authService.logout();
+  }
 }
