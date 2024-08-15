@@ -1,43 +1,52 @@
-<!-- src/app/pages/register/register.page.html -->
 <ion-header>
   <ion-toolbar>
-    <ion-title>Inscription</ion-title>
+    <ion-title class="text-center">Inscription</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
-    <ion-item>
-      <ion-label position="floating">Prénom</ion-label>
-      <ion-input formControlName="firstName"></ion-input>
-    </ion-item>
+<ion-content class="ion-padding" fullscreen>
+  <div class="d-flex align-items-center justify-content-center" style="height: 100%;">
+  <div class="register-container">
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
 
-    <ion-item>
-      <ion-label position="floating">Nom</ion-label>
-      <ion-input formControlName="lastName"></ion-input>
-    </ion-item>
+      <div class="logo-container">
 
-    <ion-item>
-      <ion-label position="floating">Pseudo</ion-label>
-      <ion-input formControlName="pseudo"></ion-input>
-    </ion-item>
+        <img src="assets/images/logo.png" class="logo" alt="Logo">
+        <h5>Bienvenu(e) sur JOIN!</h5>
 
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input formControlName="email" type="email"></ion-input>
-    </ion-item>
+      </div>
 
-    <ion-item>
-      <ion-label position="floating">Mot de passe</ion-label>
-      <ion-input formControlName="password" type="password"></ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-label position="floating">Prénom</ion-label>
+        <ion-input formControlName="firstName"></ion-input>
+      </ion-item>
 
-    <ion-button expand="full" type="submit" [disabled]="registerForm.invalid">S'inscrire</ion-button>
+      <ion-item>
+        <ion-label position="floating">Nom</ion-label>
+        <ion-input formControlName="lastName"></ion-input>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>
-        Déjà inscrit ? <a routerLink="/login">Se connecter</a>
-      </ion-label>
-    </ion-item>
-  </form>
+      <ion-item>
+        <ion-label position="floating">Pseudo</ion-label>
+        <ion-input formControlName="pseudo"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Mot de passe</ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+
+      <ion-button expand="full" type="submit" [disabled]="registerForm.invalid" class="btn-register">S'inscrire</ion-button>
+
+      <p lines="none" class="text-center mt-3"  class="register">
+        Vous avez déjà un compte ? <a routerLink="/login">Se connecter</a>
+    </p>
+    </form>
+  </div>
+  </div>
 </ion-content>
