@@ -1,127 +1,159 @@
 .auth-message {
-    background-color: #086d95; /* Light cyan background for messages from authUser */
-    border: 1px solid #07675b; /* Accent border color */
-    height: auto;
-  }
-  
-  .user-message {
-    background-color: #07675b; /* Light orange background for messages from others */
-    border: 1px solid #086d95; /* Accent border color */
-
-  }
-  
-  .icon {
-    text-align: right;
-  }
-  
-
-/* Triangle pour l'utilisateur authentifié */
-.auth-message::after {
-    content: '';
-    position: absolute;
-    top: 10px;
-    right: -10px; /* Positionne le triangle à droite */
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent rgb(241, 241, 241) transparent transparent;
-    border-radius:30px;
+    background-color: #DCF8C6; /* Fond vert clair pour les messages de l'utilisateur authentifié */
+    color: #000;
+    border-radius: 8px;
+    padding: 8px;
+    position: relative;
 }
 
-/* Triangle pour l'autre utilisateur */
-.user-message::after {
-
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: -10px; /* Positionne le triangle à gauche */
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent transparent transparent rgb(6 87 112);
-    border-radius: 30px;
+.user-message {
+    background-color: #FFF; /* Fond blanc pour les messages des autres utilisateurs */
+    color: #000;
+    border-radius: 8px;
+    padding: 8px;
+    position: relative;
 }
 
-/* Style pour l'icône */
-.icon {
-    font-size: 1.1em;
-    text-align: end;
-}
-
-/* Icône des messages non lus */
-.message-unread .icon {
-    color: #ffffff9f;
-}
-
-/* Icône des messages lus */
 .message-read .icon {
-    color: #ffffff;
+    color: #064f6f; /* Bleu pour les messages lus */
 }
 
-/* Style pour la zone de saisie de message */
-.fixed-bottom {
-    bottom: 0;
-    width: 100%;
+.message-unread .icon {
+    color: #a41d1d; /* Gris pour les messages non lus */
+}
+
+.triangle-left {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 8px 8px 0;
+    border-color: transparent #DCF8C6 transparent transparent;
+    position: absolute;
+    left: -8px;
+    top: 12px;
+}
+
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 8px;
+    border-color: transparent transparent transparent #FFF;
+    position: absolute;
+    right: -8px;
+    top: 12px;
+}
+
+.text-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.text-start {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.icon {
+    font-size: 12px;
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.auto-grow-input {
+    border-radius: 20px;
+    border: 1px solid #07675b;
+    margin: 10px;
+    padding: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+    min-height: 40px; /* Hauteur minimale pour le champ de saisie */
 }
 
 .container-form {
     display: flex;
     align-items: center;
-    height: 50px;
-    ion-textarea{
-        height: 10px;
-        border-radius:20px;
-        border: 1px solid #07675b; /* Accent border color */
-        margin: 10px;
-    }
 }
 
-.form-control {
-    flex: 1;
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
+.btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
 }
 
-.button {
-    border-color: #109ba0;
-    color: #ffffff;
+.more {
+    margin-right: 8px;
+    font-size: 24px;
 }
 
-.add {
-    background-color: #109ba0;
-    color: #000000;
-    font-size: 18px;
-    font-weight: 900;
-    border-radius: 50%;
-    padding: 3px;
+.icon-read{
+color:#1181be;
+}
+
+.icon-unread{
+    color:#959ca0;
+}
+
+input{
+    padding: 5px;
 }
 
 .container {
+    height: calc(100vh - 56px); /* Ajustez la hauteur en fonction de la hauteur de l'en-tête */
+    overflow-y: auto;
+  }
+  
+  .container-form {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+  }
+  
+  .auto-grow-input {
+    flex: 1;
+    min-height: 40px; /* Hauteur initiale */
+    overflow: hidden;
+    resize: none;
+  }
+
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .message-container {
+    margin-bottom: 80px;
+  }
+  
+  .input-area {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff; /* Assurez-vous que la couleur de fond soit visible */
     margin-top: 10px;
-    margin-bottom: 100px;
-}
-
-.title {
-    font-size: 22px;
-    font-weight: bold;
-    margin-left: -12px;
-    margin-bottom: 10px;
-}
-
-.plus {
-    margin-left: -5px;
-    margin-right: 10px;
-}
-
-.btn{
-color:#0b7258;
-font-size: 18px;
-}
-.more {
-
-    color: #000000;
-    font-size: 28px;
-    font-weight: 900;
-    border-radius: 50%;
-    padding: 3px;
-    margin-left: 10px;
-}
+  }
+  
+  .container-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .send{
+    color:#035047;
+  }

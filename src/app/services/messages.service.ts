@@ -43,4 +43,7 @@ markMessagesAsRead(userId: number): Observable<any> {
   return this.http.post<any>(`${this.apiUrl}/messages/read/${userId}`, {}, { headers: this.getAuthHeaders() });
 }
 
+getUsers(): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}/users`, { headers: this.getAuthHeaders() });
+}
 }

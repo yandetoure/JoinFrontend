@@ -14,13 +14,14 @@
 
 <ion-content [fullscreen]="true">
   <div class="container mt-3">
+    <div #messageContainer class="message-container">
     <div class="row">
       <!-- Affichage des messages -->
       <div *ngFor="let message of messages" class="col-12 mb-2">
         <div 
           [ngClass]="{
-            'text-end auth-message': message.sender_id === authUserId,
-            'text-start user-message': message.sender_id !== authUserId,
+            'text-start auth-message': message.sender_id === authUserId,
+            'text-end user-message': message.sender_id !== authUserId,
             'message-read': message.is_read,
             'message-unread': !message.is_read
           }" 
@@ -34,22 +35,11 @@
             <ion-icon name="checkmark-done-outline"></ion-icon>
           </p>
 
-          <!-- Affichage de l'heure -->
-          <p class="text-muted small mt-1">
-            <!-- Pour le récepteur, afficher l'heure de l'envoi -->
-            <span *ngIf="message.receiver_id === authUserId">
-              {{ message.created_at | date: 'shortTime' }}
-            </span>
-            <!-- Pour l'expéditeur, afficher l'heure de lecture -->
-            <span *ngIf="message.sender_id === authUserId && message.is_read">
-              Lu à {{ message.read_at | date: 'shortTime' }}
-            </span>
-          </p>
 
           <!-- Triangle pointer -->
           <div class="triangle" [ngClass]="{
             'triangle-left': message.sender_id === authUserId, 
-            'triangle-right': message.receiver_id !== authUserId
+            'triangle-right': message.sender_id !== authUserId
           }"></div>
         </div>
       </div>
@@ -62,19 +52,20 @@
       </div>
     </ng-template>
   </div>
+  </div>
 
   <!-- Zone de saisie de message -->
   <div class="fixed-bottom bg-light p-2">
     <div class="container-form">
       <ion-icon name="add-circle-outline" class="more"></ion-icon>
-      <ion-textarea
+      <ion-input
         [(ngModel)]="newMessage"
         placeholder="Écrivez un message..."
-        auto-grow="true"
-        class="form-control"
-      ></ion-textarea>
+
+        class="form-control auto-grow-input"
+      ></ion-input>
       <button (click)="sendMessage()" class="btn">
-        <ion-icon name="send"></ion-icon>
+        <ion-icon name="send" class="send"></ion-icon>
       </button>
     </div>
   </div>

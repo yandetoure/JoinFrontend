@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessagesService } from '../services/messages.service';
 import { ToastController, ModalController, NavController } from '@ionic/angular';
@@ -10,6 +10,8 @@ import { ListUserPage } from '../list-user/list-user.page';
   styleUrls: ['./messages.page.scss'],
 })
 export class MessagesPage implements OnInit {
+  @ViewChild('messageContainer', { static: false }) messageContainer: ElementRef | undefined;
+  
   userId!: number;
   messages: any[] = [];
   newMessage: string = '';
@@ -41,7 +43,9 @@ export class MessagesPage implements OnInit {
                 }
               );
             }
-          }); // <-- Ajout de la fermeture ici
+          });
+          // Appel à la méthode pour faire défiler vers le bas après la récupération des messages
+          this.scrollToBottom();
         },
         async error => {
           const toast = await this.toastController.create({
@@ -54,14 +58,22 @@ export class MessagesPage implements OnInit {
       );
     }
   }
-  
 
+  inputHeight: number = 40; // Hauteur initiale en pixels
+
+  autoGrow(event: any) {
+    const textArea = event.target;
+    textArea.style.height = 'auto';
+    this.inputHeight = textArea.scrollHeight;
+  }
+  
   sendMessage() {
     if (this.newMessage.trim()) {
       this.messagesService.sendMessage(this.userId, this.newMessage).subscribe(
         response => {
           this.messages.push(response.data);
           this.newMessage = '';
+          this.scrollToBottom(); // Faites défiler vers le bas après l'envoi du message
         },
         async error => {
           const toast = await this.toastController.create({
@@ -100,5 +112,12 @@ export class MessagesPage implements OnInit {
 
   goBack() {
     this.navCtrl.back();
+  }
+
+  scrollToBottom() {
+    if (this.messageContainer) {
+      const container = this.messageContainer.nativeElement;
+      container.scrollTop = container.scrollHeight;
+    }
   }
 }
